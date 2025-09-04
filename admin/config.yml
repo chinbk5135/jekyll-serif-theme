@@ -1,0 +1,151 @@
+backend:
+  name: git-gateway
+  branch: master # Change to 'main' if your default branch is 'main'
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  # Services Collection (main content type in Serif theme)
+  - name: "services"
+    label: "Services"
+    folder: "_services"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Layout", name: "layout", widget: "hidden", default: "service"}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Date", name: "date", widget: "datetime"}
+      - {label: "Featured", name: "featured", widget: "boolean", default: true}
+      - {label: "Weight", name: "weight", widget: "number", default: 1}
+      - {label: "Body", name: "body", widget: "markdown"}
+
+  # Team Collection
+  - name: "team"
+    label: "Team Members"
+    folder: "_team"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Layout", name: "layout", widget: "hidden", default: "team"}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Date", name: "date", widget: "datetime"}
+      - {label: "Draft", name: "draft", widget: "boolean", default: false}
+      - {label: "Image", name: "image", widget: "image", required: false}
+      - {label: "Job Title", name: "jobtitle", widget: "string"}
+      - {label: "LinkedIn", name: "linkedinurl", widget: "string", required: false}
+      - {label: "Weight", name: "weight", widget: "number", default: 1}
+      - {label: "Body", name: "body", widget: "markdown"}
+
+  # Pages Collection
+  - name: "pages"
+    label: "Pages"
+    files:
+      - label: "Home Page"
+        name: "home"
+        file: "index.md"
+        fields:
+          - {label: "Layout", name: "layout", widget: "hidden", default: "home"}
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Intro Image", name: "intro_image", widget: "image", required: false}
+          - {label: "Intro Image Absolute", name: "intro_image_absolute", widget: "boolean", default: false}
+          - {label: "Intro Image Hide on Mobile", name: "intro_image_hide_on_mobile", widget: "boolean", default: true}
+          - {label: "Show Call Box", name: "show_call_box", widget: "boolean", default: true}
+          - {label: "Body", name: "body", widget: "markdown"}
+
+      - label: "About Page"
+        name: "about"
+        file: "about.md"
+        fields:
+          - {label: "Layout", name: "layout", widget: "hidden", default: "page"}
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Body Image", name: "bodyClass", widget: "string", default: "page-about"}
+          - {label: "Body", name: "body", widget: "markdown"}
+
+      - label: "Services Page"
+        name: "services"
+        file: "services.md"
+        fields:
+          - {label: "Layout", name: "layout", widget: "hidden", default: "services"}
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Body Class", name: "bodyClass", widget: "string", default: "page-services"}
+          - {label: "Body", name: "body", widget: "markdown"}
+
+      - label: "Team Page"
+        name: "team"
+        file: "team.md"
+        fields:
+          - {label: "Layout", name: "layout", widget: "hidden", default: "teams"}
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Body Class", name: "bodyClass", widget: "string", default: "page-teams"}
+          - {label: "Body", name: "body", widget: "markdown"}
+
+      - label: "Contact Page"
+        name: "contact"
+        file: "contact.md"
+        fields:
+          - {label: "Layout", name: "layout", widget: "hidden", default: "contact"}
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Body Class", name: "bodyClass", widget: "string", default: "page-contact"}
+          - {label: "Body", name: "body", widget: "markdown"}
+
+  # Site Configuration
+  - name: "config"
+    label: "Site Configuration"
+    files:
+      - label: "Site Config"
+        name: "config"
+        file: "_config.yml"
+        fields:
+          - {label: "Base URL", name: "baseurl", widget: "string"}
+          - {label: "URL", name: "url", widget: "string"}
+          - {label: "Site Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Logo", name: "logo", widget: "object", fields: [
+              {label: "Logo Mobile", name: "mobile", widget: "image", required: false},
+              {label: "Logo Mobile Height", name: "mobile_height", widget: "string", default: "36px"},
+              {label: "Logo Mobile Width", name: "mobile_width", widget: "string", default: "36px"},
+              {label: "Logo Desktop", name: "desktop", widget: "image", required: false},
+              {label: "Logo Desktop Height", name: "desktop_height", widget: "string", default: "36px"},
+              {label: "Logo Desktop Width", name: "desktop_width", widget: "string", default: "36px"}
+            ]}
+          - {label: "Footer", name: "footer", widget: "object", fields: [
+              {label: "Copyright Text", name: "copyright_text", widget: "string"}
+            ]}
+
+  # Data Files
+  - name: "data"
+    label: "Site Data"
+    files:
+      - label: "Features"
+        name: "features"
+        file: "_data/features.yml"
+        fields:
+          - {label: "Features", name: "features", widget: "list", fields: [
+              {label: "Title", name: "title", widget: "string"},
+              {label: "Description", name: "description", widget: "text"},
+              {label: "Image", name: "image", widget: "image"}
+            ]}
+
+      - label: "Contact Info"
+        name: "contact"
+        file: "_data/contact.yml"
+        fields:
+          - {label: "Email", name: "email", widget: "string"}
+          - {label: "Phone", name: "phone", widget: "string"}
+          - {label: "Contact Button URL", name: "contact_button_link", widget: "string"}
+
+      - label: "Social Media"
+        name: "social"
+        file: "_data/social.yml"
+        fields:
+          - {label: "Social Links", name: "social", widget: "list", fields: [
+              {label: "Name", name: "name", widget: "string"},
+              {label: "Link", name: "link", widget: "string"},
+              {label: "Image", name: "image", widget: "image"}
+            ]}
